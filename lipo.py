@@ -1,11 +1,12 @@
+# Author Ioannis Athanasiadis (ath.ioannis94@gmail.com) 2018
 import numpy as np
 
 __all__ = ["lipo", "adalipo"]
 
 def lipo(n, k, X, f, MAX_ITERATIONS_PER_T = 100):
   """
-    This is the adalipo algorithms described in section 3
-    in the work of Malherbe and Vayatis.
+    This is the lipo algorithm as described in section 3
+    of the work of Malherbe and Vayatis.
     Args:
       n : number of iterations
       K : The specific lipschitz constant, best to use the smallest possible
@@ -37,17 +38,17 @@ def lipo(n, k, X, f, MAX_ITERATIONS_PER_T = 100):
 
 def adalipo(n, K, X, f, p):
   """
-      This the adalipo algorithm described in section 4
-      in the work of Malherbe and Vayatis. It does not require a specific k
-      value as lipo, but a grid of values where to search for it.
-      Args:
-          n : number of iterations
-          K : grid of lipschitz constants (non-decreasing list or numpy array)
-          X : possible inputs of f
-          f : the lipschitz function which to find maxima (as a function object)
-          p : propability of exploitation vs (1-p) propability of exploration
-      Returns:
-          The estimated value which maximizes f.
+    This the adalipo algorithm as described in section 4
+    of the work of Malherbe and Vayatis. It does not require a specific k
+    value as lipo, but a grid of values where to search for it.
+    Args:
+      n : number of iterations
+      K : grid of lipschitz constants (non-decreasing list or numpy array)
+      X : possible inputs of f
+      f : the lipschitz function which to find maxima (as a function object)
+      p : propability of exploitation vs (1-p) propability of exploration
+    Returns:
+      The estimated value which maximizes f.
   """
   # initialize I as a numpy array of input X
   # for faster computations

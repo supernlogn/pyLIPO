@@ -13,7 +13,7 @@ def lipo(n, k, X, f, MAX_ITERATIONS_PER_T = 100):
       X : possible inputs of f
       f : the lipschitz function which to find maxima (as a function object)
       MAX_ITERATIONS_PER_T : (optional) max iterations to do per timestep t, the algorithm can find itself
-                              in an endless loop cause it depends to propability in order to go to the next timestep.  
+                              in an endless loop cause it depends to propability in order to go to the next timestep.
     Returns:
       The estimated value which maximizes f.
   """
@@ -26,7 +26,7 @@ def lipo(n, k, X, f, MAX_ITERATIONS_PER_T = 100):
   it_per_t = 0
   # Iterations part of the algorithm
   while(t < n and it_per_t < MAX_ITERATIONS_PER_T):
-    Xnew = np.random.choice(X)
+    Xnew = np.random.choice(np.delete(X, np.where(np.isin(X, Xi))))
     nfx = fx[:t]
     it_per_t += 1
     if(np.min(nfx + k * np.linalg.norm(Xnew - Xi)) > np.max(fx)):
@@ -87,7 +87,7 @@ def adalipo(n, K, X, f, p):
       for idx_i, Iii in enumerate(Ii):
         for idx_j, Ij in enumerate(I):
           l[idx_i, idx_j] = np.linalg.norm(Iii - Ij)
-      # w is an estimation of the term inside the min inside 
+      # w is an estimation of the term inside the min inside
       # the Lemma 8 after definition 7
       w = knew * l
       nfx = fx[:t]

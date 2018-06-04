@@ -55,9 +55,6 @@ def adalipo(n, K, X, f, p):
   """
   # initialize I as a numpy array of input X
   # for faster computations
-  # if(len(np.shape(X)) > 1):
-  #   I = np.squeeze(X)
-  # else:
   I = np.array(X)
   if(len(I.shape) == 1):
     I = np.expand_dims(I, -1)
@@ -78,13 +75,9 @@ def adalipo(n, K, X, f, p):
       Xnew = np.squeeze(I[np.random.randint(I.shape[0], size=1), :])
     else: # exploitation
       mx = np.max(fx, axis=-1)
-      # if(len(np.shape(I)) > 1):
-        # Ii = np.squeeze(Xi)
-      # else:
       Ii = np.array(Xi)
       if(len(Ii.shape) == 1):
         Ii = np.expand_dims(Ii, 0)
-      # print(Ii)
       # l contains the norm-2 distance between the points the algorithm
       # has explored and the points in the possible inputs of f
       l = np.zeros((len(Ii), len(I)))
@@ -110,11 +103,8 @@ def adalipo(n, K, X, f, p):
     df = np.subtract.outer(fx[:t+1], fx[:t+1])
     fs = []
     idx = 0
-    # fs = np.zeros(((len(Xi)) * (len(Xi) - 1), ))
     ndf = np.linalg.norm(np.expand_dims(df, -1), axis=-1)
-    # print(np.shape(Xi), Xi)
     dX = np.subtract.outer(Xi, Xi)
-    # print(np.shape(dX), np.shape(Xi))
     dx = np.array([dX[:,i,:,i] for i in xrange(np.shape(dX)[-1])])
     ndx = np.linalg.norm(dx, axis=0)
     for i in xrange(np.shape(ndf)[0]):
